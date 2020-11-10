@@ -34,3 +34,11 @@ end
 every 7.days do
   command "cd /var/www/stream_pusher/current/ && :environment_variable=:environment bundle exec rails runner script/remove_old_recordings.rb >> :output"
 end
+
+every '0 0 8 3 *' do
+  command "cd /var/www/stream_pusher/current/ && :environment_variable=:environment bundle exec rake dst_fallback"
+end
+
+every '0 0 1 11 *' do
+  command "cd /var/www/stream_pusher/current/ && :environment_variable=:environment bundle exec rake dst_fallforward"
+end
