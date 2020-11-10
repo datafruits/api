@@ -26,6 +26,8 @@ gem 'mixcloud', github: 'streampusher/mixcloud-ruby'
 gem 'soundcloud'
 gem 'omniauth-tumblr'
 gem 'tumblr_client'
+gem 'twitter'
+
 gem 'cancancan'
 gem 'docker-api', '~> 1.22.4', require: 'docker'
 gem 'simple_form'

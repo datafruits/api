@@ -37,8 +37,9 @@ class ScheduledShow < ActiveRecord::Base
   after_update :save_recurrences_in_background, if: :recurring_interval_changed?
   before_destroy :maybe_destroy_recurrences
 
-  before_save :ensure_time_zone
+  after_save :schedule_tweet, if: :start_at_changed?
 
+  before_save :ensure_time_zone
 
   enum recurring_interval: [:not_recurring, :day, :week, :month, :year, :biweek]
 
@@ -267,5 +268,11 @@ class ScheduledShow < ActiveRecord::Base
 
   def is_original_recurrant?
     !self.recurrant_original_id.present?
+  end
+
+  def schedule_tweet
+    if self.notify_twitter?
+      ScheduledShowNotificationWorker.perform_later self.id
+    end
   end
 end

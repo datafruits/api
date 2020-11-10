@@ -1,5 +1,6 @@
 class SocialIdentity < ActiveRecord::Base
   belongs_to :user
+  belongs_to :radio
 
   def self.find_with_omniauth(auth)
     self.find_by(uid: auth['uid'], provider: auth['provider'])
