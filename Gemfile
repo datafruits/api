@@ -2,18 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.0.7.2'
 gem 'pg'
-gem 'sass-rails'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails'
-gem 'sprockets', '3.7.0'
-
-# assets gems
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails', '~> 3.2.2'
-gem 'font-awesome-sass', '~> 4.6.0'
-gem 'chosen-rails'
 
 gem 'spring',        group: :development
 
@@ -28,7 +16,6 @@ gem 'omniauth-tumblr'
 gem 'tumblr_client'
 gem 'cancancan'
 gem 'docker-api', '~> 1.22.4', require: 'docker'
-gem 'simple_form'
 gem 'cocaine'
 gem 'lograge'
 gem 'rack-cors', :require => 'rack/cors'
@@ -86,29 +73,13 @@ gem 'paperclip'
 gem 'rupeepeethree', github: "datafruits/rupeepeethree"
 gem "so_id3", github: "streampusher/so_id3"
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-countUp.js', '1.8.2'
-  gem 'rails-assets-moment'
-  gem 'rails-assets-moment-timezone'
-  gem 'rails-assets-fullcalendar', '3.2.0'
-  gem 'rails-assets-jplayer'
-  gem 'rails-assets-chartjs'
-  gem 'rails-assets-BaremetricsCalendar'
-  gem 'rails-assets-underscore'
-  gem 'rails-assets-bootstrap-tour'
-  gem 'rails-assets-spectrum'
-end
-
 gem 'whenever', require: false
-# gem 'sinatra', :require => nil
 
 gem 'recurrence'
 
 gem 'html-pipeline'
 gem 'commonmarker'
 gem 'github-markdown'
-gem 'ember-cli-rails'
-gem 'high_voltage'
 
 gem 'geocoder'
 gem 'ruby-liquidsoap', github: 'streampusher/ruby-liquidsoap', :require => 'liquidsoap'

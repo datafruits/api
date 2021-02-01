@@ -16,6 +16,8 @@ services:
       - 5432
     volumes:
       - postgres_data_9.4:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
   rails:
     image: "streampusher/streampusher:latest"
     user: rails
