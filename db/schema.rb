@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201209054216) do
+ActiveRecord::Schema.define(version: 20210204002111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,16 +55,6 @@ ActiveRecord::Schema.define(version: 20201209054216) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
-  end
-
-  create_table "host_application_votes", force: :cascade do |t|
-    t.integer  "host_application_id", null: false
-    t.integer  "user_id",             null: false
-    t.boolean  "approve",             null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["host_application_id"], name: "index_host_application_votes_on_host_application_id", using: :btree
-    t.index ["user_id"], name: "index_host_application_votes_on_user_id", using: :btree
   end
 
   create_table "host_applications", force: :cascade do |t|
@@ -134,6 +124,15 @@ ActiveRecord::Schema.define(version: 20201209054216) do
     t.string   "name",       default: "", null: false
   end
 
+  create_table "playlist_track_favorites", force: :cascade do |t|
+    t.integer  "user_id",           null: false
+    t.integer  "playlist_track_id", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["playlist_track_id"], name: "index_playlist_track_favorites_on_playlist_track_id", using: :btree
+    t.index ["user_id"], name: "index_playlist_track_favorites_on_user_id", using: :btree
+  end
+
   create_table "playlist_tracks", force: :cascade do |t|
     t.integer  "track_id",               null: false
     t.integer  "playlist_id",            null: false
@@ -196,11 +195,11 @@ ActiveRecord::Schema.define(version: 20201209054216) do
     t.boolean  "vj_enabled",                                  default: false, null: false
     t.boolean  "podcasts_enabled",                            default: false, null: false
     t.boolean  "stats_enabled",                               default: false, null: false
-    t.boolean  "social_identities_enabled",                   default: false, null: false
     t.string   "tunein_partner_id"
     t.string   "tunein_partner_key"
     t.string   "tunein_station_id"
     t.boolean  "tunein_metadata_updates_enabled",             default: false, null: false
+    t.boolean  "social_identities_enabled",                   default: false, null: false
     t.string   "container_name",                                              null: false
     t.boolean  "schedule_monitor_enabled",                    default: false, null: false
     t.string   "show_share_url"
@@ -262,7 +261,6 @@ ActiveRecord::Schema.define(version: 20201209054216) do
     t.string   "title"
     t.string   "time_zone"
     t.string   "slug"
-    t.boolean  "notify_twitter",        default: false, null: false
     t.index ["dj_id"], name: "index_scheduled_shows_on_dj_id", using: :btree
     t.index ["playlist_id"], name: "index_scheduled_shows_on_playlist_id", using: :btree
     t.index ["radio_id"], name: "index_scheduled_shows_on_radio_id", using: :btree
@@ -328,11 +326,10 @@ ActiveRecord::Schema.define(version: 20201209054216) do
     t.datetime "artwork_updated_at"
     t.integer  "mixcloud_upload_status",               default: 0,  null: false
     t.string   "mixcloud_key"
-    t.integer  "soundcloud_upload_status",             default: 0,  null: false
-    t.string   "soundcloud_key"
     t.integer  "uploaded_by_id"
     t.integer  "scheduled_show_id"
-    t.index ["audio_file_name", "id"], name: "index_tracks_on_audio_file_name_and_id", unique: true, using: :btree
+    t.integer  "soundcloud_upload_status",             default: 0,  null: false
+    t.string   "soundcloud_key"
     t.index ["radio_id"], name: "index_tracks_on_radio_id", using: :btree
     t.index ["scheduled_show_id"], name: "index_tracks_on_scheduled_show_id", using: :btree
     t.index ["uploaded_by_id"], name: "index_tracks_on_uploaded_by_id", using: :btree
@@ -371,7 +368,7 @@ ActiveRecord::Schema.define(version: 20201209054216) do
     t.text     "bio"
     t.string   "image_file_name"
     t.string   "image_content_type"
-    t.bigint   "image_file_size"
+    t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "profile_publish",                    default: false, null: false
     t.integer  "style",                              default: 0,     null: false
