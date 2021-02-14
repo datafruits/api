@@ -128,6 +128,7 @@ Rails.application.routes.draw do
     end
     resources :microtexts, only: [:create, :index]
     resources :schedule, only: [:index]
+    resources :user_follows, only: [:create, :destroy]
   end
 
   post "/setup" => "setup#create"

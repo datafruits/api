@@ -45,6 +45,9 @@ class Ability
 
       can :index, :profile
       can :create, :profile
+      can :manage, UserFollow do |user_follow|
+        can_manage_radio?(user, radio) && user_follow.user_id == user.id
+      end
     elsif user.dj?
       can :index, :current_user
       can :index, Radio if can_manage_radio?(user, radio)
@@ -113,12 +116,19 @@ class Ability
 
       can :create, Microtext if can_manage_radio?(user, radio)
 
+      can :manage, UserFollow do |user_follow|
+        can_manage_radio?(user, radio) && user_follow.user_id == user.id
+      end
+
       cannot :admin, :dashboard
       cannot :admin, :radios
       cannot :admin, :sign_in_as
     elsif user.listener?
       can :index, :current_user
       can :create, Microtext if can_manage_radio?(user, radio)
+      can :manage, UserFollow do |user_follow|
+        can_manage_radio?(user, radio) && user_follow.user_id == user.id
+      end
 
       cannot :admin, :dashboard
       cannot :admin, :radios
